@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pokemon extends Model
+class Pokemon extends BaseModel
 {
     protected $fillable = [
         'owner',

@@ -27,3 +27,7 @@ $app->get('pokemon/{owner}/{id}', 'PokemonController@getPokemon');
 $app->post('pokemon/{owner}', 'PokemonController@createPokemon');
 $app->put('pokemon/{owner}/{id}', 'PokemonController@updatePokemon');
 $app->delete('pokemon/{owner}/{id}', 'PokemonController@deletePokemon');
+
+$app->get('random', function(){
+    return str_random(32);
+});
