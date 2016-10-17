@@ -16,8 +16,14 @@ $app->get('/', function () use ($app) {
 });
 
 
-$app->get('users', UsersController@index);
-$app->get('users/{id}', UsersController@getUser);
-$app->post('users', UsersController@createUser);
-$app->put('users/{id}', UsersController@updateUser);
-$app->delete('users/{id}', UsersController@deleteUser);
+$app->get('users', 'UsersController@index');
+$app->get('users/{id}', 'UsersController@getUser');
+$app->post('users', 'UsersController@createUser');
+$app->put('users/{id}', 'UsersController@updateUser');
+$app->delete('users/{id}', 'UsersController@deleteUser');
+
+$app->get('pokemon/{owner}', 'PokemonController@index');
+$app->get('pokemon/{owner}/{id}', 'PokemonController@getPokemon');
+$app->post('pokemon/{owner}', 'PokemonController@createPokemon');
+$app->put('pokemon/{owner}/{id}', 'PokemonController@updatePokemon');
+$app->delete('pokemon/{owner}/{id}', 'PokemonController@deletePokemon');
