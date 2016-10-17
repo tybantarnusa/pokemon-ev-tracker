@@ -18,8 +18,8 @@
 
         <div class="pokelist" ng-repeat="x in id">
             <div class="bordered"><br />
-                Nama:&nbsp; <input type="text" ng-change="update(x)" ng-model="name[x]" /><br /><br />
-                Nature: <input type="text" ng-model="nature[x]" /><br /><br />
+                Nama:&nbsp; <input type="text" ng-change="updateName(x)" ng-model="name[x]" /><br /><br />
+                Nature: <input type="text" ng-change="updateNature(x)" ng-model="nature[x]" /><br /><br />
             </div><br />
         </div>
 

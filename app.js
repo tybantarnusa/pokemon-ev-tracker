@@ -12,9 +12,14 @@ app.controller('pokemonController', function($scope, $http) {
     $scope.name = [];
     $scope.nature = [];
     $scope.id = [];
-    $scope.update = function(id) {
+    $scope.updateName = function(id) {
         $http.put('./api/index.php/pokemon/Developer/'+id, {
             name: $scope.name[id]
+        });
+    }
+    $scope.updateNature = function(id) {
+        $http.put('./api/index.php/pokemon/Developer/'+id, {
+            nature: $scope.nature[id]
         });
     }
     $http.get('./api/index.php/pokemon/Developer')
