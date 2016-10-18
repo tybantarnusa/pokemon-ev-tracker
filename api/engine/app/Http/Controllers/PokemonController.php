@@ -27,7 +27,7 @@ class PokemonController extends Controller
         $pokemon->nature = $request->input('nature');
         $pokemon->save();
 
-        return response()->json(Pokemon::first());
+        return response()->json(Pokemon::orderBy('id', 'desc')->first());
     }
 
     public function updatePokemon($owner, $id, Request $request) {
@@ -59,7 +59,7 @@ class PokemonController extends Controller
         $pokemon = Pokemon::find($id);
         $pokemon->delete();
 
-        return response()->json('Deleted');
+        return response()->json('deleted');
     }
 
 }

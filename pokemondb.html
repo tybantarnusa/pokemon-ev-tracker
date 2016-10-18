@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+            url: 'pokemondb.php',
+            type: 'GET',
+            dataType: 'html',
+            })
+        .done(function ( response ) {
+            var scraped = $(response).find('.ent-name');
+            var pokemonname = [];
+            for (var i = 0; i < scraped.length; i++) {
+                pokemonname.push(scraped[i].text);
+            }
+            $('body').append(JSON.stringify(pokemonname));
+        });
+    </script>
+</body>
+</html>

@@ -18,8 +18,9 @@
 
         <div class="pokelist" ng-repeat="x in id">
             <div class="bordered"><br />
-                Nama:&nbsp; <input type="text" ng-change="updateName(x)" ng-model="name[x]" /><br /><br />
+                Nama:&nbsp; <select ng-model="name[x]" ng-change="updateName(x)" ng-options="pokemon for pokemon in filteredNames = (data.names | filter: test)"><option value="" selected hidden /></select><input type="text" ng-model="test" ng-change="autoselect(x, filteredNames)" /><br /><br />
                 Nature: <input type="text" ng-change="updateNature(x)" ng-model="nature[x]" /><br /><br />
+                <button ng-click="remove(x)">Delete</button><br /><br />
             </div><br />
         </div>
 

@@ -9,18 +9,37 @@ var field = '' +
 var id = 0;
 
 app.controller('pokemonController', function($scope, $http) {
+    $scope.data = {
+        names: []
+    }
+    $http.get('./data/pokemon_names.json').then(function(response){
+        $scope.data.names = response.data;
+    });
     $scope.name = [];
     $scope.nature = [];
     $scope.id = [];
-    $scope.updateName = function(id) {
-        $http.put('./api/index.php/pokemon/Developer/'+id, {
-            name: $scope.name[id]
+    $scope.updateName = function(pid) {
+        $http.put('./api/index.php/pokemon/Developer/'+pid, {
+            name: $scope.name[pid]
         });
     }
-    $scope.updateNature = function(id) {
-        $http.put('./api/index.php/pokemon/Developer/'+id, {
-            nature: $scope.nature[id]
+    $scope.updateNature = function(pid) {
+        $http.put('./api/index.php/pokemon/Developer/'+pid, {
+            nature: $scope.nature[pid]
         });
+    }
+    $scope.remove = function(pid) {
+        $http.delete('./api/index.php/pokemon/Developer/' + pid).then(function(response){
+            $scope.id.splice($scope.id.indexOf(pid), 1);
+            console.log($scope.id);
+            delete $scope.name[pid];
+            delete $scope.nature[pid];
+        });
+    }
+    $scope.autoselect = function(pid, test) {
+        console.log(test);
+        $scope.name[pid] = test[0];
+        $scope.updateName(pid);
     }
     $http.get('./api/index.php/pokemon/Developer')
     .then(function(response){
@@ -36,6 +55,9 @@ app.controller('pokemonController', function($scope, $http) {
         $('.tst').show();
         $('.loading').hide();
     });
+    //setInterval(function(){console.log(id); console.log($scope.id)}, 500);
+
+
 });
 
 app.directive('addPokemon', function($compile, $http){
@@ -43,8 +65,8 @@ app.directive('addPokemon', function($compile, $http){
         restrict: 'A',
         link: function(scope, element) {
             element.click(function(e){
-                var name = scope.name[id] = "Test " + id;
-                var nature = scope.nature[id] = "Nature " + id;
+                var name = scope.name[id] = "";
+                var nature = scope.nature[id] = "";
                 scope.id.push(id++);
                 scope.$apply();
                 $http.post('./api/index.php/pokemon/Developer', {
@@ -52,7 +74,7 @@ app.directive('addPokemon', function($compile, $http){
                     image: "img",
                     name: name,
                     nature: nature
-                }).then(function(response){id = response.data.id + 1});
+                }).then(function(response){console.log(response.data); id = response.data.id + 1});
             });
         }
     };
